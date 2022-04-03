@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 const { Schema, model } = mongoose
 
-const picsSchema = new Schema(
+const picSchema = new Schema(
 	{
 		source: {
 			type: String,
@@ -31,4 +31,4 @@ const picsSchema = new Schema(
 	}
 )
 
-module.exports = model("Pictures", picsSchema)
+module.exports = model("Picture", picSchema)

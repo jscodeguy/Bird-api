@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 const { Schema, model } = mongoose
 
-const favsSchema = new Schema(
+const favSchema = new Schema(
 	{
 		haveSeen: {
 			type: Boolean,
@@ -31,4 +31,4 @@ const favsSchema = new Schema(
 	}
 )
 
-module.exports = model("Favorites", favsSchema)
+module.exports = model("Favorite", favSchema)
