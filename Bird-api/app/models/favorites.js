@@ -19,7 +19,7 @@ const favsSchema = new Schema(
         pics: {
             type: Schema.Types.ObjectId,
             ref: "Pictures"
-        }
+        },
         bird: {
             // ID to be captured from the API
             type: String,
