@@ -4,7 +4,7 @@ const express = require("express")
 const passport = require("passport")
 
 // pull in Mongoose model for pictures
-const picture = require("../models/picture")
+const favorite = require("../models/favorite")
 
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
@@ -28,14 +28,14 @@ const requireToken = passport.authenticate("bearer", { session: false })
 const router = express.Router()
 
 // INDEX
-// GET /pictures
-router.get("/pictures", (req, res, next) => {
-	picture.find()
-		.then((pictures) => {
-			// "pictures" will be an array of Mongoose documents.
+// GET /favorites
+router.get("/favorites", (req, res, next) => {
+	favorite.find()
+		.then((favorites) => {
+			// "favorites" will be an array of Mongoose documents.
 			// We want to convert each one to a POJO, so we use ".map" to
 			// apply ".toObject" to each one
-			return pictures.map((picture) => picture.toObject())
+			return favorites.map((favorite) => favorite.toObject())
 		})
 		// respond with status 200 and JSON of the pictures
 		.then((pictures) => res.status(200).json({ pictures: pictures }))
@@ -44,27 +44,27 @@ router.get("/pictures", (req, res, next) => {
 })
 
 // SHOW
-// GET /pictures/5a7db6c74d55bc51bdf39793
-router.get("/pictures/:id", (req, res, next) => {
+// GET /favorites/5a7db6c74d55bc51bdf39793
+router.get("/favorites/:id", requireToken, (req, res, next) => {
 	// req.params.id will be set based on the ":id" in the route
-	picture.findById(req.params.id)
+	favorite.findById(req.params.id)
 		.then(handle404)
-		// if "findById" is succesful, respond with 200 and picture JSON
-		.then((picture) => res.status(200).json({ picture: picture.toObject() }))
+		// if "findById" is succesful, respond with 200 and sighting JSON
+		.then((favorite) => res.status(200).json({ favorite: favorite.toObject() }))
 		// if an error occurs, pass it to the handler
 		.catch(next)
 })
 
 // CREATE
-// POST /pictures
-router.post("/pictures", requireToken, (req, res, next) => {
-	// set owner of new picture to be current user
-	req.body.picture.owner = req.user.id
+// POST /favorites
+router.post("/favorites", requireToken, (req, res, next) => {
+	// set owner of new sighting to be current user
+	req.body.favorite.owner = req.user.id
 
-	picture.create(req.body.picture)
-		// respond to succesful "create" with status 201 and JSON of new picture
-		.then((picture) => {
-			res.status(201).json({ picture: picture.toObject() })
+	favorite.create(req.body.favorite)
+		// respond to succesful "create" with status 201 and JSON of new sighting
+		.then((favorite) => {
+			res.status(201).json({ favorite: favorite.toObject() })
 		})
 		// if an error occurs, pass it off to our error handler
 		// the error handler needs the error message and the `res` object so that it
@@ -73,21 +73,21 @@ router.post("/pictures", requireToken, (req, res, next) => {
 })
 
 // UPDATE
-// PATCH /pictures/5a7db6c74d55bc51bdf39793
-router.patch("/pictures/:id", requireToken, removeBlanks, (req, res, next) => {
+// PATCH /favorites/5a7db6c74d55bc51bdf39793
+router.patch("/favorites/:id", requireToken, removeBlanks, (req, res, next) => {
 	// if the client attempts to change the "owner" property by including a new
 	// owner, prevent that by deleting that key/value pair
-	delete req.body.picture.owner
+	delete req.body.favorite.owner
 
-    picture.findById(req.params.id)
+    favorite.findById(req.params.id)
 		.then(handle404)
-		.then((picture) => {
+		.then((favorite) => {
 			// pass the "req" object and the Mongoose record to "requireOwnership"
 			// it will throw an error if the current user isn't the owner
-			requireOwnership(req, picture)
+			requireOwnership(req, favorite)
 
 			// pass the result of Mongoose"s ".update" to the next ".then"
-			return picture.updateOne(req.body.picture)
+			return favorite.updateOne(req.body.favorite)
 		})
 		// if that succeeded, return 204 and no JSON
 		.then(() => res.sendStatus(204))
@@ -96,15 +96,15 @@ router.patch("/pictures/:id", requireToken, removeBlanks, (req, res, next) => {
 })
 
 // DESTROY
-// DELETE /picture/5a7db6c74d55bc51bdf39793
-router.delete("/pictures/:id", requireToken, (req, res, next) => {
-	picture.findById(req.params.id)
+// DELETE /favorites/5a7db6c74d55bc51bdf39793
+router.delete("/favorites/:id", requireToken, (req, res, next) => {
+	favorite.findById(req.params.id)
 		.then(handle404)
-		.then((picture) => {
-			// throw an error if current user doesn't own "picture"
-			requireOwnership(req, picture)
-			// delete the picture ONLY IF the above didn't throw
-			picture.deleteOne()
+		.then((favorite) => {
+			// throw an error if current user doesn't own "sighting"
+			requireOwnership(req, favorite)
+			// delete the sighting ONLY IF the above didn't throw
+			favorite.deleteOne()
 		})
 		// send back 204 and no content if the deletion succeeded
 		.then(() => res.sendStatus(204))
@@ -112,5 +112,5 @@ router.delete("/pictures/:id", requireToken, (req, res, next) => {
 		.catch(next)
 })
 
-
+// keep at bottom of file
 module.exports = router
