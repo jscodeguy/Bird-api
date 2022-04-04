@@ -4,7 +4,7 @@ const express = require("express")
 const passport = require("passport")
 
 // pull in Mongoose model for favorites
-const favorite = require("../models/favorite")
+const Favorite = require("../models/favorite")
 
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
@@ -30,7 +30,7 @@ const router = express.Router()
 // INDEX
 // GET /favorites
 router.get("/favorites", (req, res, next) => {
-	favorite.find()
+	Favorite.find()
 		.then((favorites) => {
 			// "favorites" will be an array of Mongoose documents.
 			// We want to convert each one to a POJO, so we use ".map" to
@@ -47,7 +47,7 @@ router.get("/favorites", (req, res, next) => {
 // GET /favorites/5a7db6c74d55bc51bdf39793
 router.get("/favorites/:id", (req, res, next) => {
 	// req.params.id will be set based on the ":id" in the route
-	favorite.findById(req.params.id)
+	Favorite.findById(req.params.id)
 		.then(handle404)
 		// if "findById" is succesful, respond with 200 and sighting JSON
 		.then((favorite) => res.status(200).json({ favorite: favorite.toObject() }))
@@ -61,7 +61,7 @@ router.post("/favorites", requireToken, (req, res, next) => {
 	// set owner of new sighting to be current user
 	req.body.favorite.owner = req.user.id
 
-	favorite.create(req.body.favorite)
+	Favorite.create(req.body.favorite)
 		// respond to succesful "create" with status 201 and JSON of new sighting
 		.then((favorite) => {
 			res.status(201).json({ favorite: favorite.toObject() })
@@ -79,7 +79,7 @@ router.patch("/favorites/:id", requireToken, removeBlanks, (req, res, next) => {
 	// owner, prevent that by deleting that key/value pair
 	delete req.body.favorite.owner
 
-    favorite.findById(req.params.id)
+    Favorite.findById(req.params.id)
 		.then(handle404)
 		.then((favorite) => {
 			// pass the "req" object and the Mongoose record to "requireOwnership"
@@ -98,7 +98,7 @@ router.patch("/favorites/:id", requireToken, removeBlanks, (req, res, next) => {
 // DESTROY
 // DELETE /favorites/5a7db6c74d55bc51bdf39793
 router.delete("/favorites/:id", requireToken, (req, res, next) => {
-	favorite.findById(req.params.id)
+	Favorite.findById(req.params.id)
 		.then(handle404)
 		.then((favorite) => {
 			// throw an error if current user doesn't own "sighting"
