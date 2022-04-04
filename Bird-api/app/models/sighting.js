@@ -23,15 +23,15 @@ const sightingSchema = new Schema(
         },
         owner: {
 			type: Schema.Types.ObjectId,
-			ref: "User",
+			ref: "User"
 		},
         pics: {
 			type: Schema.Types.ObjectId,
-			ref: "Pictures",
+			ref: "Pictures"
 		},
         bird: {
-            type: String,
-            required: true,
+            type: String
+            // required: true,
         }
 	},
 	{
