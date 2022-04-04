@@ -4,6 +4,8 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 
 // require route files
+const favoriteRoutes = require('./app/routes/favorite_routes')
+const pictureRoutes = require('./app/routes/pictures_routes')
 const sightingRoutes = require('./app/routes/sighting_routes')
 const exampleRoutes = require('./app/routes/example_routes')
 const userRoutes = require('./app/routes/user_routes')
@@ -66,6 +68,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(requestLogger)
 
 // register route files
+app.use(favoriteRoutes)
+app.use(pictureRoutes)
 app.use(sightingRoutes)
 app.use(exampleRoutes)
 app.use(userRoutes)
