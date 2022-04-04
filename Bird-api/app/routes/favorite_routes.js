@@ -3,7 +3,7 @@ const express = require("express")
 // Passport docs: http://www.passportjs.org/docs/
 const passport = require("passport")
 
-// pull in Mongoose model for pictures
+// pull in Mongoose model for favorites
 const favorite = require("../models/favorite")
 
 // this is a collection of methods that help us detect situations when we need
@@ -37,15 +37,15 @@ router.get("/favorites", (req, res, next) => {
 			// apply ".toObject" to each one
 			return favorites.map((favorite) => favorite.toObject())
 		})
-		// respond with status 200 and JSON of the pictures
-		.then((pictures) => res.status(200).json({ pictures: pictures }))
+		// respond with status 200 and JSON of the favorites
+		.then((favorites) => res.status(200).json({ favorites: favorites }))
 		// if an error occurs, pass it to the handler
 		.catch(next)
 })
 
 // SHOW
 // GET /favorites/5a7db6c74d55bc51bdf39793
-router.get("/favorites/:id", requireToken, (req, res, next) => {
+router.get("/favorites/:id", (req, res, next) => {
 	// req.params.id will be set based on the ":id" in the route
 	favorite.findById(req.params.id)
 		.then(handle404)
