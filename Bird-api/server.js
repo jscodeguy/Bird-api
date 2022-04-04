@@ -7,7 +7,6 @@ const cors = require('cors')
 const favoriteRoutes = require('./app/routes/favorite_routes')
 const pictureRoutes = require('./app/routes/picture_routes')
 const sightingRoutes = require('./app/routes/sighting_routes')
-const exampleRoutes = require('./app/routes/example_routes')
 const userRoutes = require('./app/routes/user_routes')
 
 // require middleware
@@ -71,7 +70,6 @@ app.use(requestLogger)
 app.use(favoriteRoutes)
 app.use(pictureRoutes)
 app.use(sightingRoutes)
-app.use(exampleRoutes)
 app.use(userRoutes)
 
 // register error handling middleware
