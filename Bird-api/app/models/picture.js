@@ -1,6 +1,8 @@
+// Import dependencies
 const mongoose = require("mongoose")
-
 const { Schema, model } = mongoose
+const commentSchema = require("./comment")
+const User = require("./user")
 
 const picSchema = new Schema(
 	{
@@ -16,15 +18,11 @@ const picSchema = new Schema(
 			type: Schema.Types.ObjectId,
 			ref: "User",
 		},
-        notes: {
-			type: Schema.Types.ObjectId,
-			ref: "Comment",
-		},
         bird: {
             // ID to be captured from the API
-            type: String,
-            required: true,
-        }
+            type: String
+        },
+		comments: [commentSchema]
 	},
 	{
 		timestamps: true,

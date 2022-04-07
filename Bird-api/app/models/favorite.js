@@ -12,10 +12,6 @@ const favSchema = new Schema(
 			type: Schema.Types.ObjectId,
 			ref: "User",
 		},
-        notes: {
-			type: Schema.Types.ObjectId,
-			ref: "Comment",
-		},
         pics: {
             type: Schema.Types.ObjectId,
             ref: "Pictures"
@@ -24,7 +20,8 @@ const favSchema = new Schema(
             // ID to be captured from the API
             type: String,
             required: true,
-        }
+        },
+		// comments: [commentSchema]
 	},
 	{
 		timestamps: true,
