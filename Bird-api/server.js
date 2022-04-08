@@ -2,9 +2,17 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const cloudinary = require("cloudinary").v2
+require("dotenv").config()
+
+// Config information for uploading to Cloudinary
+cloudinary.config({
+	cloud_name: process.env.CLOUD_NAME,
+	api_key: process.env.API_KEY,
+	api_secret: process.env.API_SECRET
+})
 
 // require route files
-
 const favoriteRoutes = require('./app/routes/favorite_routes')
 const userRoutes = require('./app/routes/user_routes')
 const sightingRoutes = require('./app/routes/sighting_routes')
@@ -33,6 +41,7 @@ const clientDevPort = 3000
 mongoose.connect(db, {
 	useNewUrlParser: true,
 })
+
 
 // instantiate express application object
 const app = express()

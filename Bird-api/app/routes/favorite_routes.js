@@ -3,8 +3,9 @@ const express = require("express")
 // Passport docs: http://www.passportjs.org/docs/
 const passport = require("passport")
 
-// pull in Mongoose model for favorites
+// pull in Mongoose model for favorites and comments
 const Favorite = require("../models/favorite")
+const comment = require("../models/comment")
 
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
@@ -57,7 +58,7 @@ router.get("/favorites/:id", (req, res, next) => {
 
 // CREATE
 // POST /favorites
-router.post("/favorites", requireToken, (req, res, next) => {
+router.post("/favorites", requireToken, removeBlanks, (req, res, next) => {
 	// set owner of new sighting to be current user
 	req.body.favorite.owner = req.user.id
 

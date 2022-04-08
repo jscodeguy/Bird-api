@@ -2,15 +2,17 @@
 const express = require("express")
 // Passport docs: http://www.passportjs.org/docs/
 const passport = require("passport")
+// Cloudinary docs: https://cloudinary.com/documentation/
+const cloudinary = require("cloudinary").v2
 
-// pull in Mongoose model for pictures and comments
-const picture = require("../models/picture")
-const comment = require("../models/comment")
 
+// pull in Mongoose model for pictures
+const Picture = require("../models/picture")
 
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
 const customErrors = require("../../lib/custom_errors")
+
 
 // we"ll use this function to send 404 when non-existant document is requested
 const handle404 = customErrors.handle404
@@ -32,7 +34,7 @@ const router = express.Router()
 // INDEX
 // GET /pictures
 router.get("/pictures", (req, res, next) => {
-	picture.find()
+	Picture.find()
 		.then((pictures) => {
 			// "pictures" will be an array of Mongoose documents.
 			// We want to convert each one to a POJO, so we use ".map" to
@@ -45,11 +47,17 @@ router.get("/pictures", (req, res, next) => {
 		.catch(next)
 })
 
+// //INDEX
+// // GET /pictures/upload
+// router.get("/upload", (req, res) => {
+// 	res.json({ message: "Ground Control to Major Tom"})
+// })
+
 // SHOW
 // GET /pictures/5a7db6c74d55bc51bdf39793
 router.get("/pictures/:id", (req, res, next) => {
 	// req.params.id will be set based on the ":id" in the route
-	picture.findById(req.params.id)
+	Picture.findById(req.params.id)
 		.then(handle404)
 		// if "findById" is succesful, respond with 200 and picture JSON
 		.then((picture) => res.status(200).json({ picture: picture.toObject() }))
@@ -59,11 +67,10 @@ router.get("/pictures/:id", (req, res, next) => {
 
 // CREATE
 // POST /pictures
-router.post("/pictures", requireToken, (req, res, next) => {
+router.post("/pictures", requireToken, removeBlanks, (req, res, next) => {
 	// set owner of new picture to be current user
 	req.body.picture.owner = req.user.id
-
-	picture.create(req.body.picture)
+	Picture.create(req.body.picture)
 		// respond to succesful "create" with status 201 and JSON of new picture
 		.then((picture) => {
 			res.status(201).json({ picture: picture.toObject() })
@@ -74,6 +81,22 @@ router.post("/pictures", requireToken, (req, res, next) => {
 		.catch(next)
 })
 
+// //CREATE - Image upload for Cloudinary
+// // POST /pictures/upload
+// router.post("/upload", (req, res) => {
+// 	const data = { image: req.body.image }
+// 	cloudinary.uploader.upload(data.image)
+// 		.then((res) => {
+// 			console.log("response Url:", res.url)
+// 			console.log("response:", res)
+// 			return resCloud = res
+// 		// 	res.status(200).send({ message: "success", res })
+// 		// })
+// 		// .catch((err) => {
+// 		// 	res.status(500).send({ message: "failure", err })
+// 		})
+// })
+
 // UPDATE
 // PATCH /pictures/5a7db6c74d55bc51bdf39793
 router.patch("/pictures/:id", requireToken, removeBlanks, (req, res, next) => {
@@ -81,7 +104,7 @@ router.patch("/pictures/:id", requireToken, removeBlanks, (req, res, next) => {
 	// owner, prevent that by deleting that key/value pair
 	delete req.body.picture.owner
 
-    picture.findById(req.params.id)
+    Picture.findById(req.params.id)
 		.then(handle404)
 		.then((picture) => {
 			// pass the "req" object and the Mongoose record to "requireOwnership"
@@ -100,7 +123,7 @@ router.patch("/pictures/:id", requireToken, removeBlanks, (req, res, next) => {
 // DESTROY
 // DELETE /picture/5a7db6c74d55bc51bdf39793
 router.delete("/pictures/:id", requireToken, (req, res, next) => {
-	picture.findById(req.params.id)
+	Picture.findById(req.params.id)
 		.then(handle404)
 		.then((picture) => {
 			// throw an error if current user doesn't own "picture"

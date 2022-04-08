@@ -20,53 +20,65 @@ const Sightings = require("./sighting")
 const starterPics = [
     { "source": "https://i.imgur.com/rRrA3zD.jpg",
         "description": "I can't believe I managed to get this shot!!",
-        "bird": "1234_bird_id_from_api"
+        "bird": "1234_bird_id_from_api",
+        "owner": "624b492a0eccccf59d938a54"
     },
     { "source": "https://i.imgur.com/Tjciztp.jpg",
         "description": "look at this colorful little guy",
-        "bird": "2345_bird_id_from_api"
+        "bird": "2345_bird_id_from_api",
+        "owner": "624b492a0eccccf59d938a54"
     },
     { "source": "https://i.imgur.com/vwmdEId.jpg",
         "description": "I love themmmm!",
-        "bird": "3456_bird_id_from_api"
+        "bird": "3456_bird_id_from_api",
+        "owner": "624b492a0eccccf59d938a54"
     },
     { "source": "https://i.imgur.com/7gTOmsP.jpg",
         "description": "Pigeons need love too.",
-        "bird": "2345_bird_id_from_api"
+        "bird": "2345_bird_id_from_api",
+        "owner": "624b492a0eccccf59d938a54"
     },
     { "source": "https://i.imgur.com/ls7js2s.jpg",
         "description": "S'UP",
-        "bird": "2345_bird_id_from_api"
+        "bird": "2345_bird_id_from_api",
+        "owner": "624b492a0eccccf59d938a54"
     },
     { "source": "https://i.imgur.com/3SNfh0D.jpg",
         "description": "I will mess you up.",
-        "bird": "1234_bird_id_from_api"
+        "bird": "1234_bird_id_from_api",
+        "owner": "624b492a0eccccf59d938a54"
     }
 ]
 
 // Seed data for Favorites
 const starterFavs = [
     { "haveSeen": true,
+        "owner": "624b492a0eccccf59d938a54",
         "note": "MY LIFE CHANGED",
         "bird": "2345_bird_id_from_api"
     },
     { "haveSeen": true,
+        "owner": "624b492a0eccccf59d938a54",
         "note": "a precious son",
         "bird": "1234_bird_id_from_api"
     },
     { "haveSeen": true,
+        "owner": "624b492a0eccccf59d938a54",
         "note": "blirdbo from my skies",
         "bird": "3456_bird_id_from_api"
     },
     { "haveSeen": false,
+        "owner": "624b492a0eccccf59d938a54",
         "note": "I WANT MY LIFE TO CHANGE",
         "bird": "2345_bird_id_from_api"
     },
     { "haveSeen": false,
+        "owner": "624b492a0eccccf59d938a54",
         "note": "One day... One day...",
         "bird": "4567_bird_id_from_api"
     },
     { "haveSeen": false,
+        "owner": "624b492a0eccccf59d938a54",
         "note": "Does this bird even exist?",
         "bird": "4567_bird_id_from_api"
     }
@@ -78,36 +90,42 @@ const starterSights = [
         "when_seen": "4/1/2022",
         "weather": "sun",
         "description": "It was a gorgeous day and the birds were twittery and perfect.",
+        "owner": "624b492a0eccccf59d938a54",
         "bird": "1234_bird_id_from_api"
     },
     { "where_seen": "Albertsons parking lot",
         "when_seen": "2/27/2022",
         "weather": "snow",
         "description": "So cold, but the crows don't care.",
+        "owner": "624b492a0eccccf59d938a54",
         "bird": "1234_bird_id_from_api"
     },
     { "where_seen": "out my window",
         "when_seen": "5/17/2020",
         "weather": "rain",
         "description": "AWESOME",
+        "owner": "624b492a0eccccf59d938a54",
         "bird": "2345_bird_id_from_api"
     },
     { "where_seen": "The zoo (not in a cage though)",
         "when_seen": "9/9/21",
         "weather": "sun",
         "description": "Gave them a peanut! :D",
+        "owner": "624b492a0eccccf59d938a54",
         "bird": "3456_bird_id_from_api"
     },
     { "where_seen": "In a tree",
         "when_seen": "2/2/22",
         "weather": "overcast",
         "description": "Just living their bird life.",
+        "owner": "624b492a0eccccf59d938a54",
         "bird": "4567_bird_id_from_api"
     },
     { "where_seen": "flying",
         "when_seen": "4/20/22",
         "weather": "sun",
         "description": "so beautiful i cried",
+        "owner": "624b492a0eccccf59d938a54",
         "bird": "4567_bird_id_from_api"
     }
 ]

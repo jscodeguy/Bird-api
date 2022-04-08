@@ -7,16 +7,14 @@ const User = require("./user")
 const picSchema = new Schema(
 	{
 		source: {
-			type: String,
-			required: true,
+			type: JSON
 		},
         description: {
-            type: String,
-            required: true,
+            type: String
         },
 		owner: {
 			type: Schema.Types.ObjectId,
-			ref: "User",
+			ref: "User"
 		},
         bird: {
             // ID to be captured from the API

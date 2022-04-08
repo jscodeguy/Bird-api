@@ -57,7 +57,7 @@ router.get("/sightings/:id", (req, res, next) => {
 
 // CREATE
 // POST /sightings
-router.post("/sightings", requireToken, (req, res, next) => {
+router.post("/sightings", requireToken, removeBlanks, (req, res, next) => {
 	// set owner of new sighting to be current user
 	req.body.sighting.owner = req.user.id
 
