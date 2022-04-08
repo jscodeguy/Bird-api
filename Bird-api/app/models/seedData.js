@@ -21,32 +21,64 @@ const starterPics = [
     { "source": "https://i.imgur.com/rRrA3zD.jpg",
         "description": "I can't believe I managed to get this shot!!",
         "bird": "1234_bird_id_from_api",
-        "owner": "624b492a0eccccf59d938a54"
+        "owner": "624b492a0eccccf59d938a54",
+        "comments": {
+            "note": "Jealous!",
+            "author": "62502b4bbd6b824bf6232031"
+        }
     },
     { "source": "https://i.imgur.com/Tjciztp.jpg",
         "description": "look at this colorful little guy",
         "bird": "2345_bird_id_from_api",
-        "owner": "624b492a0eccccf59d938a54"
+        "owner": "624b492a0eccccf59d938a54",
+        "comments": {
+            "note": "nature's paintbrush",
+            "author": "62502b94ba169d0103170b88"
+        },
+        "comments": {
+            "note": "I have a shirt just like that.",
+            "author": "62502b4bbd6b824bf6232031"
+        }
     },
     { "source": "https://i.imgur.com/vwmdEId.jpg",
         "description": "I love themmmm!",
         "bird": "3456_bird_id_from_api",
-        "owner": "624b492a0eccccf59d938a54"
+        "owner": "624b492a0eccccf59d938a54",
+        "comments": {
+            "note": "eww affection",
+            "author": "62502b4bbd6b824bf6232031"
+        },
+        "comments": {
+            "note": "SHUT UP THEY'RE PERFECT",
+            "author": "62502b94ba169d0103170b88"
+        }
     },
     { "source": "https://i.imgur.com/7gTOmsP.jpg",
         "description": "Pigeons need love too.",
         "bird": "2345_bird_id_from_api",
-        "owner": "624b492a0eccccf59d938a54"
+        "owner": "624b492a0eccccf59d938a54",
+        "comments": {
+            "note": "I LOVE YOU PIGEON",
+            "author": "62502b94ba169d0103170b88"
+        }
     },
     { "source": "https://i.imgur.com/ls7js2s.jpg",
         "description": "S'UP",
         "bird": "2345_bird_id_from_api",
-        "owner": "624b492a0eccccf59d938a54"
+        "owner": "624b492a0eccccf59d938a54",
+        "comments": {
+            "note": "first",
+            "author": "62502b94ba169d0103170b88"
+        }
     },
     { "source": "https://i.imgur.com/3SNfh0D.jpg",
         "description": "I will mess you up.",
         "bird": "1234_bird_id_from_api",
-        "owner": "624b492a0eccccf59d938a54"
+        "owner": "624b492a0eccccf59d938a54",
+        "comments": {
+            "note": "#mood",
+            "author": "62502c20098d5ec2590901df"
+        }
     }
 ]
 
