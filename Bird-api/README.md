@@ -1,7 +1,20 @@
-# express-auth-template
 
-A template for starting projects with `express` as an API. Includes
-authentication and common middlewares.
+## Ruffled Feathers
+
+## A bird app for people who love birds.
+
+---
+
+## ERD
+
+![ERD for Ruffled Feathers](bird-erd-3.png)
+
+## Route Tables
+![route table for sightings](Sightings routes.jpg)
+![route table for pictures](Picture routes.jpg)
+![route table for favorites](Favorite routes.jpg)
+
+
 
 ## Installation
 
