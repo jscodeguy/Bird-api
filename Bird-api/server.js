@@ -2,15 +2,15 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
-const cloudinary = require("cloudinary").v2
+// const cloudinary = require("cloudinary").v2
 require("dotenv").config()
 
 // Config information for uploading to Cloudinary
-cloudinary.config({
-	cloud_name: process.env.CLOUD_NAME,
-	api_key: process.env.API_KEY,
-	api_secret: process.env.API_SECRET
-})
+//  cloudinary.config({
+// 	cloud_name: process.env.CLOUD_NAME,
+// 	api_key: process.env.API_KEY,
+// 	api_secret: process.env.API_SECRET
+// })
 
 // require route files
 const favoriteRoutes = require('./app/routes/favorite_routes')

@@ -3,7 +3,7 @@ const express = require("express")
 // Passport docs: http://www.passportjs.org/docs/
 const passport = require("passport")
 // Cloudinary docs: https://cloudinary.com/documentation/
-const cloudinary = require("cloudinary").v2
+// const cloudinary = require("cloudinary").v2
 
 
 // pull in Mongoose model for pictures
